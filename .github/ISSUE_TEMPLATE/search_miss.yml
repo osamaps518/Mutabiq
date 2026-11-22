@@ -1,0 +1,35 @@
+name: Search miss
+description: A search that didn't find what it should
+labels: ["search-miss"]
+body:
+  - type: input
+    id: query
+    attributes:
+      label: What was typed
+      placeholder: رز
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What should have been found
+      placeholder: أرز بسمتي
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: What came back instead
+      placeholder: Nothing, or كرز
+  - type: textarea
+    id: settings
+    attributes:
+      label: Alias packs and settings used
+      description: Alias packs, thresholds, fields searched.
+  - type: input
+    id: version
+    attributes:
+      label: Mutabiq version
+      placeholder: "0.1.0"
+    validations:
+      required: true

@@ -1,0 +1,61 @@
+name: Alias suggestion
+description: Words that should match each other in an alias pack
+labels: ["alias"]
+body:
+  - type: markdown
+    attributes:
+      value: Alias data is CC0, so words taken from Wiktionary (CC BY-SA) or Open Food Facts (ODbL) can't be accepted.
+  - type: textarea
+    id: words
+    attributes:
+      label: Words that should match each other
+      description: One group per line.
+      placeholder: |
+        رز, أرز
+        بندورة, طماطم
+    validations:
+      required: true
+  - type: dropdown
+    id: direction
+    attributes:
+      label: Same meaning both ways?
+      options:
+        - Yes, equal words
+        - No, one-way (explain below)
+    validations:
+      required: true
+  - type: dropdown
+    id: dialect
+    attributes:
+      label: Dialect
+      options:
+        - Levantine
+        - Egyptian
+        - Gulf
+        - Maghrebi
+        - Standard Arabic
+        - All or unsure
+    validations:
+      required: true
+  - type: input
+    id: domain
+    attributes:
+      label: Domain
+      placeholder: food
+    validations:
+      required: true
+  - type: textarea
+    id: source
+    attributes:
+      label: Source
+      description: Where the words come from, and any notes on one-way entries.
+      placeholder: My own knowledge
+    validations:
+      required: true
+  - type: checkboxes
+    id: licence
+    attributes:
+      label: Licence
+      options:
+        - label: These words are my own knowledge or from a CC0 source, and I agree to release them under CC0 1.0
+          required: true
