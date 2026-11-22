@@ -1,0 +1,12 @@
+ db  |   lat   | arabic  | arabic_unchanged 
+ t_c | i diŞ İ | أرز ة ى | t
+  db  |   lat   | arabic  | arabic_unchanged 
+ t_en | i diş i | أرز ة ى | t
+  db  |   lat   | arabic  | arabic_unchanged 
+ t_tr | ı dış i | أرز ة ى | t
+  db  |   lat   | arabic  | arabic_unchanged 
+ t_ar | i diş i | أرز ة ى | t
+    db     |   lat   | arabic  | arabic_unchanged 
+ t_builtin | i diş i | أرز ة ى | t
+  db   |   lat   | arabic  | arabic_unchanged 
+ t_icu | i diş i̇ | أرز ة ى | t

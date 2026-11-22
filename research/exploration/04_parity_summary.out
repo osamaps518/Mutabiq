@@ -1,0 +1,10 @@
+db=t_en tested=20023 mismatches=1598
+  mismatches NOT explained by İ / Greek sigma (Unicode lower() special cases): 0
+db=t_builtin tested=20023 mismatches=1598
+  mismatches NOT explained by İ / Greek sigma (Unicode lower() special cases): 0
+db=t_icu tested=20023 mismatches=0
+  mismatches NOT explained by İ / Greek sigma (Unicode lower() special cases): 0
+db=t_c tested=20023 mismatches=1598
+  mismatches NOT explained by İ / Greek sigma (Unicode lower() special cases): 0
+db=t_ar tested=20023 mismatches=1598
+  mismatches NOT explained by İ / Greek sigma (Unicode lower() special cases): 0

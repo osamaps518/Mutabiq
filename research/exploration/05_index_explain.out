@@ -1,0 +1,163 @@
+Timing is off.
+psql:05_index_explain.sql:4: NOTICE:  table "foods" does not exist, skipping
+DROP TABLE
+CREATE TABLE
+INSERT 0 50400
+ rows  
+-------
+ 50400
+
+CREATE INDEX
+CREATE INDEX
+ANALYZE
+SET
+--- Q1: expression form, 4-char query مقلوبة (prepared, raw input normalized in SQL)
+PREPARE
+                                                                                                                                                                                                        QUERY PLAN                                                                                                                                                                                                        
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Bitmap Heap Scan on foods (actual rows=2583.00 loops=1)
+   Recheck Cond: ((translate(regexp_replace(lower(name), '[\u064B-\u0652\u0670\u0640]'::text, ''::text, 'g'::text), 'أإآةىئیک٠١٢٣٤٥٦٧٨٩۰۱۲۳۴۵۶۷۸۹'::text, 'اااهيييك01234567890123456789'::text) ~~ '%مقلوبه%'::text) OR ('مقلوبه'::text <% translate(regexp_replace(lower(name), '[\u064B-\u0652\u0670\u0640]'::text, ''::text, 'g'::text), 'أإآةىئیک٠١٢٣٤٥٦٧٨٩۰۱۲۳۴۵۶۷۸۹'::text, 'اااهيييك01234567890123456789'::text)))
+   Filter: ((translate(regexp_replace(lower(name), '[\u064B-\u0652\u0670\u0640]'::text, ''::text, 'g'::text), 'أإآةىئیک٠١٢٣٤٥٦٧٨٩۰۱۲۳۴۵۶۷۸۹'::text, 'اااهيييك01234567890123456789'::text) ~~ '%مقلوبه%'::text) OR ('مقلوبه'::text <% translate(regexp_replace(lower(name), '[\u064B-\u0652\u0670\u0640]'::text, ''::text, 'g'::text), 'أإآةىئیک٠١٢٣٤٥٦٧٨٩۰۱۲۳۴۵۶۷۸۹'::text, 'اااهيييك01234567890123456789'::text)))
+   Heap Blocks: exact=154
+   Buffers: shared hit=187
+   ->  BitmapOr (actual rows=0.00 loops=1)
+         Buffers: shared hit=33
+         ->  Bitmap Index Scan on foods_ar_norm_trgm (actual rows=2520.00 loops=1)
+               Index Cond: (translate(regexp_replace(lower(name), '[\u064B-\u0652\u0670\u0640]'::text, ''::text, 'g'::text), 'أإآةىئیک٠١٢٣٤٥٦٧٨٩۰۱۲۳۴۵۶۷۸۹'::text, 'اااهيييك01234567890123456789'::text) ~~ '%مقلوبه%'::text)
+               Index Searches: 1
+               Buffers: shared hit=10
+         ->  Bitmap Index Scan on foods_ar_norm_trgm (actual rows=2583.00 loops=1)
+               Index Cond: (translate(regexp_replace(lower(name), '[\u064B-\u0652\u0670\u0640]'::text, ''::text, 'g'::text), 'أإآةىئیک٠١٢٣٤٥٦٧٨٩۰۱۲۳۴۵۶۷۸۹'::text, 'اااهيييك01234567890123456789'::text) %> 'مقلوبه'::text)
+               Index Searches: 1
+               Buffers: shared hit=23
+ Planning:
+   Buffers: shared hit=48
+ Planning Time: 0.725 ms
+ Execution Time: 14.120 ms
+
+--- Q2: same, 2-char query رز
+                                                                                                                                                                                                 QUERY PLAN                                                                                                                                                                                                 
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Seq Scan on foods (actual rows=8820.00 loops=1)
+   Filter: ((translate(regexp_replace(lower(name), '[\u064B-\u0652\u0670\u0640]'::text, ''::text, 'g'::text), 'أإآةىئیک٠١٢٣٤٥٦٧٨٩۰۱۲۳۴۵۶۷۸۹'::text, 'اااهيييك01234567890123456789'::text) ~~ '%رز%'::text) OR ('رز'::text <% translate(regexp_replace(lower(name), '[\u064B-\u0652\u0670\u0640]'::text, ''::text, 'g'::text), 'أإآةىئیک٠١٢٣٤٥٦٧٨٩۰۱۲۳۴۵۶۷۸۹'::text, 'اااهيييك01234567890123456789'::text)))
+   Rows Removed by Filter: 41580
+   Buffers: shared hit=536
+ Planning:
+   Buffers: shared hit=2
+ Planning Time: 0.336 ms
+ Execution Time: 292.122 ms
+
+--- Q3: forcing generic plan (what a driver with server-side prepared statements may get)
+SET
+                                                                                                                                                                                                                                                                                                                                                                                  QUERY PLAN                                                                                                                                                                                                                                                                                                                                                                                  
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Bitmap Heap Scan on foods (actual rows=2583.00 loops=1)
+   Recheck Cond: ((translate(regexp_replace(lower(name), '[\u064B-\u0652\u0670\u0640]'::text, ''::text, 'g'::text), 'أإآةىئیک٠١٢٣٤٥٦٧٨٩۰۱۲۳۴۵۶۷۸۹'::text, 'اااهيييك01234567890123456789'::text) ~~ (('%'::text || translate(regexp_replace(lower($1), '[\u064B-\u0652\u0670\u0640]'::text, ''::text, 'g'::text), 'أإآةىئیک٠١٢٣٤٥٦٧٨٩۰۱۲۳۴۵۶۷۸۹'::text, 'اااهيييك01234567890123456789'::text)) || '%'::text)) OR (translate(regexp_replace(lower($1), '[\u064B-\u0652\u0670\u0640]'::text, ''::text, 'g'::text), 'أإآةىئیک٠١٢٣٤٥٦٧٨٩۰۱۲۳۴۵۶۷۸۹'::text, 'اااهيييك01234567890123456789'::text) <% translate(regexp_replace(lower(name), '[\u064B-\u0652\u0670\u0640]'::text, ''::text, 'g'::text), 'أإآةىئیک٠١٢٣٤٥٦٧٨٩۰۱۲۳۴۵۶۷۸۹'::text, 'اااهيييك01234567890123456789'::text)))
+   Filter: ((translate(regexp_replace(lower(name), '[\u064B-\u0652\u0670\u0640]'::text, ''::text, 'g'::text), 'أإآةىئیک٠١٢٣٤٥٦٧٨٩۰۱۲۳۴۵۶۷۸۹'::text, 'اااهيييك01234567890123456789'::text) ~~ (('%'::text || translate(regexp_replace(lower($1), '[\u064B-\u0652\u0670\u0640]'::text, ''::text, 'g'::text), 'أإآةىئیک٠١٢٣٤٥٦٧٨٩۰۱۲۳۴۵۶۷۸۹'::text, 'اااهيييك01234567890123456789'::text)) || '%'::text)) OR (translate(regexp_replace(lower($1), '[\u064B-\u0652\u0670\u0640]'::text, ''::text, 'g'::text), 'أإآةىئیک٠١٢٣٤٥٦٧٨٩۰۱۲۳۴۵۶۷۸۹'::text, 'اااهيييك01234567890123456789'::text) <% translate(regexp_replace(lower(name), '[\u064B-\u0652\u0670\u0640]'::text, ''::text, 'g'::text), 'أإآةىئیک٠١٢٣٤٥٦٧٨٩۰۱۲۳۴۵۶۷۸۹'::text, 'اااهيييك01234567890123456789'::text)))
+   Heap Blocks: exact=154
+   Buffers: shared hit=187
+   ->  BitmapOr (actual rows=0.00 loops=1)
+         Buffers: shared hit=33
+         ->  Bitmap Index Scan on foods_ar_norm_trgm (actual rows=2520.00 loops=1)
+               Index Cond: (translate(regexp_replace(lower(name), '[\u064B-\u0652\u0670\u0640]'::text, ''::text, 'g'::text), 'أإآةىئیک٠١٢٣٤٥٦٧٨٩۰۱۲۳۴۵۶۷۸۹'::text, 'اااهيييك01234567890123456789'::text) ~~ (('%'::text || translate(regexp_replace(lower($1), '[\u064B-\u0652\u0670\u0640]'::text, ''::text, 'g'::text), 'أإآةىئیک٠١٢٣٤٥٦٧٨٩۰۱۲۳۴۵۶۷۸۹'::text, 'اااهيييك01234567890123456789'::text)) || '%'::text))
+               Index Searches: 1
+               Buffers: shared hit=10
+         ->  Bitmap Index Scan on foods_ar_norm_trgm (actual rows=2583.00 loops=1)
+               Index Cond: (translate(regexp_replace(lower(name), '[\u064B-\u0652\u0670\u0640]'::text, ''::text, 'g'::text), 'أإآةىئیک٠١٢٣٤٥٦٧٨٩۰۱۲۳۴۵۶۷۸۹'::text, 'اااهيييك01234567890123456789'::text) %> translate(regexp_replace(lower($1), '[\u064B-\u0652\u0670\u0640]'::text, ''::text, 'g'::text), 'أإآةىئیک٠١٢٣٤٥٦٧٨٩۰۱۲۳۴۵۶۷۸۹'::text, 'اااهيييك01234567890123456789'::text))
+               Index Searches: 1
+               Buffers: shared hit=23
+ Planning:
+   Buffers: shared hit=2
+ Planning Time: 0.192 ms
+ Execution Time: 19.335 ms
+
+                                                                                                                                                                                                                                                                                                                                                                                  QUERY PLAN                                                                                                                                                                                                                                                                                                                                                                                  
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Bitmap Heap Scan on foods (actual rows=8820.00 loops=1)
+   Recheck Cond: ((translate(regexp_replace(lower(name), '[\u064B-\u0652\u0670\u0640]'::text, ''::text, 'g'::text), 'أإآةىئیک٠١٢٣٤٥٦٧٨٩۰۱۲۳۴۵۶۷۸۹'::text, 'اااهيييك01234567890123456789'::text) ~~ (('%'::text || translate(regexp_replace(lower($1), '[\u064B-\u0652\u0670\u0640]'::text, ''::text, 'g'::text), 'أإآةىئیک٠١٢٣٤٥٦٧٨٩۰۱۲۳۴۵۶۷۸۹'::text, 'اااهيييك01234567890123456789'::text)) || '%'::text)) OR (translate(regexp_replace(lower($1), '[\u064B-\u0652\u0670\u0640]'::text, ''::text, 'g'::text), 'أإآةىئیک٠١٢٣٤٥٦٧٨٩۰۱۲۳۴۵۶۷۸۹'::text, 'اااهيييك01234567890123456789'::text) <% translate(regexp_replace(lower(name), '[\u064B-\u0652\u0670\u0640]'::text, ''::text, 'g'::text), 'أإآةىئیک٠١٢٣٤٥٦٧٨٩۰۱۲۳۴۵۶۷۸۹'::text, 'اااهيييك01234567890123456789'::text)))
+   Rows Removed by Index Recheck: 41580
+   Filter: ((translate(regexp_replace(lower(name), '[\u064B-\u0652\u0670\u0640]'::text, ''::text, 'g'::text), 'أإآةىئیک٠١٢٣٤٥٦٧٨٩۰۱۲۳۴۵۶۷۸۹'::text, 'اااهيييك01234567890123456789'::text) ~~ (('%'::text || translate(regexp_replace(lower($1), '[\u064B-\u0652\u0670\u0640]'::text, ''::text, 'g'::text), 'أإآةىئیک٠١٢٣٤٥٦٧٨٩۰۱۲۳۴۵۶۷۸۹'::text, 'اااهيييك01234567890123456789'::text)) || '%'::text)) OR (translate(regexp_replace(lower($1), '[\u064B-\u0652\u0670\u0640]'::text, ''::text, 'g'::text), 'أإآةىئیک٠١٢٣٤٥٦٧٨٩۰۱۲۳۴۵۶۷۸۹'::text, 'اااهيييك01234567890123456789'::text) <% translate(regexp_replace(lower(name), '[\u064B-\u0652\u0670\u0640]'::text, ''::text, 'g'::text), 'أإآةىئیک٠١٢٣٤٥٦٧٨٩۰۱۲۳۴۵۶۷۸۹'::text, 'اااهيييك01234567890123456789'::text)))
+   Heap Blocks: exact=536
+   Buffers: shared hit=744
+   ->  BitmapOr (actual rows=0.00 loops=1)
+         Buffers: shared hit=208
+         ->  Bitmap Index Scan on foods_ar_norm_trgm (actual rows=50400.00 loops=1)
+               Index Cond: (translate(regexp_replace(lower(name), '[\u064B-\u0652\u0670\u0640]'::text, ''::text, 'g'::text), 'أإآةىئیک٠١٢٣٤٥٦٧٨٩۰۱۲۳۴۵۶۷۸۹'::text, 'اااهيييك01234567890123456789'::text) ~~ (('%'::text || translate(regexp_replace(lower($1), '[\u064B-\u0652\u0670\u0640]'::text, ''::text, 'g'::text), 'أإآةىئیک٠١٢٣٤٥٦٧٨٩۰۱۲۳۴۵۶۷۸۹'::text, 'اااهيييك01234567890123456789'::text)) || '%'::text))
+               Index Searches: 1
+               Buffers: shared hit=200
+         ->  Bitmap Index Scan on foods_ar_norm_trgm (actual rows=1260.00 loops=1)
+               Index Cond: (translate(regexp_replace(lower(name), '[\u064B-\u0652\u0670\u0640]'::text, ''::text, 'g'::text), 'أإآةىئیک٠١٢٣٤٥٦٧٨٩۰۱۲۳۴۵۶۷۸۹'::text, 'اااهيييك01234567890123456789'::text) %> translate(regexp_replace(lower($1), '[\u064B-\u0652\u0670\u0640]'::text, ''::text, 'g'::text), 'أإآةىئیک٠١٢٣٤٥٦٧٨٩۰۱۲۳۴۵۶۷۸۹'::text, 'اااهيييك01234567890123456789'::text))
+               Index Searches: 1
+               Buffers: shared hit=8
+ Planning Time: 0.008 ms
+ Execution Time: 366.621 ms
+
+RESET
+--- Q4: generated-column form
+PREPARE
+                                       QUERY PLAN                                       
+----------------------------------------------------------------------------------------
+ Bitmap Heap Scan on foods (actual rows=2583.00 loops=1)
+   Recheck Cond: ((name_search ~~ '%مقلوبه%'::text) OR ('مقلوبه'::text <% name_search))
+   Filter: ((name_search ~~ '%مقلوبه%'::text) OR ('مقلوبه'::text <% name_search))
+   Heap Blocks: exact=154
+   Buffers: shared hit=187
+   ->  BitmapOr (actual rows=0.00 loops=1)
+         Buffers: shared hit=33
+         ->  Bitmap Index Scan on foods_name_search_trgm (actual rows=2520.00 loops=1)
+               Index Cond: (name_search ~~ '%مقلوبه%'::text)
+               Index Searches: 1
+               Buffers: shared hit=10
+         ->  Bitmap Index Scan on foods_name_search_trgm (actual rows=2583.00 loops=1)
+               Index Cond: (name_search %> 'مقلوبه'::text)
+               Index Searches: 1
+               Buffers: shared hit=23
+ Planning:
+   Buffers: shared hit=5
+ Planning Time: 0.426 ms
+ Execution Time: 1.487 ms
+
+                                QUERY PLAN                                
+--------------------------------------------------------------------------
+ Seq Scan on foods (actual rows=8820.00 loops=1)
+   Filter: ((name_search ~~ '%رز%'::text) OR ('رز'::text <% name_search))
+   Rows Removed by Filter: 41580
+   Buffers: shared hit=536
+ Planning:
+   Buffers: shared hit=2
+ Planning Time: 0.257 ms
+ Execution Time: 82.515 ms
+
+--- Q5: baseline seq scan for comparison (index disabled)
+SET
+SET
+                                                                                                                                                                                                     QUERY PLAN                                                                                                                                                                                                     
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Seq Scan on foods (actual rows=2583.00 loops=1)
+   Filter: ((translate(regexp_replace(lower(name), '[\u064B-\u0652\u0670\u0640]'::text, ''::text, 'g'::text), 'أإآةىئیک٠١٢٣٤٥٦٧٨٩۰۱۲۳۴۵۶۷۸۹'::text, 'اااهيييك01234567890123456789'::text) ~~ '%مقلوبه%'::text) OR ('مقلوبه'::text <% translate(regexp_replace(lower(name), '[\u064B-\u0652\u0670\u0640]'::text, ''::text, 'g'::text), 'أإآةىئیک٠١٢٣٤٥٦٧٨٩۰۱۲۳۴۵۶۷۸۹'::text, 'اااهيييك01234567890123456789'::text)))
+   Rows Removed by Filter: 47817
+   Buffers: shared hit=536
+ Planning:
+   Buffers: shared hit=2
+ Planning Time: 0.427 ms
+ Execution Time: 318.970 ms
+
+RESET
+RESET
+--- trigrams extracted from short queries
+   q    |                            show_trgm                             
+--------+------------------------------------------------------------------
+ رز     | {0x8e859c,0x999df4,0x1e0526}
+ ارز    | {0x999df4,0xdf3048,0xfb1d42,0x64f824}
+ مقلوبه | {0xa40379,0xa66016,0xb7b209,0xe2dfcb,0x3595e0,0x5b11f3,0x6818a8}
+
+  heap   | idx_expr | idx_gen 
+---------+----------+---------
+ 4288 kB | 1592 kB  | 1592 kB
+
+--- result counts
+   q    | count 
+--------+-------
+ مقلوبة |  2583
+ رز     |  8820
+

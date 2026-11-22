@@ -1,0 +1,9 @@
+# pg_arabic claim verification (PostgreSQL 18.7 PGDG, cross-checked on 17.12) — 2026-11-21
+Box: Debian 13, no Docker -> apt.postgresql.org packages. Throwaway clusters in ./pgdata (PG18, :5499) and ./pgdata17 (PG17, :5498), both stopped.
+
+1. ar_norm SQL function: TRUE (with fixes). Claude's verbatim translate() has an extra space -> 29 vs 28 chars -> ک deleted, every digit shifted (٣->2). Space removed: 0 Arabic mismatches vs Python rules over 20,023 strings in every locale tested (only diffs: İ / final-sigma lowercasing, non-Arabic). Expression GIN + generated column both work, planner uses BitmapOr of both index paths (also with a generic plan). Generated col 1.5 ms vs expression index 14 ms (recheck re-runs regexp) vs seq scan 319 ms on 50,400 rows. 2-char رز: seq scan (custom plan) or full-index scan returning all 50,400 (generic plan), ~80–370 ms. lower() on Arabic: locale-independent; on Latin it varies (tr_TR: I->ı; C: İ unchanged; ICU: İ->i̇).
+2. C/POSIX: show_trgm('أرز')={} confirmed. Builtin C.UTF-8 DOES NOT FIX IT on PG17 or PG18 (still {}), nor ICU 'und' with LC_CTYPE C, nor a COLLATE clause. pg_trgm follows libc LC_CTYPE: works with LC_CTYPE en_US.UTF-8 / C.UTF-8 / ar_EG.UTF-8 (libc, ICU or builtin provider). Fast-sort-plus-Arabic combo that works: LC_COLLATE 'C' + LC_CTYPE 'C.UTF-8'.
+3. رز contains-branch: TRUE, retrieves أرز/الأرز/ارز; word_similarity('رز','ارز')=0.333 (<0.5). False positives: برز, فرز, مرزوق, برزة, حرز, طرز, خرزة, جرز, كرز (cherry!), كرزات, مارزيبان, أرزة لبنان.
+4. Snowball (PG): رز->رز, أرز/ارز/الأرز/الارز/بالأرز->ارز; never equates رز with أرز. Overstems بيضات->يضا, بندورة->ندور, بسمتي->سمت. Tashaphyne light stem DOES map أرز->رز but also كرز->رز, برز->رز, بيض->يض.
+5. Azure Flexible Server: no bring-your-own extensions (allowlist only). ParadeDB: arabic Snowball stemmer + ICU tokenizer.
+See NN_*.out for exact SQL/output; run_all.sh reproduces.

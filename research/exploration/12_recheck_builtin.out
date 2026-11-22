@@ -1,0 +1,77 @@
+psql:12_recheck_builtin.sql:1: NOTICE:  database "t_b2" does not exist, skipping
+DROP DATABASE
+CREATE DATABASE
+psql:12_recheck_builtin.sql:2: NOTICE:  database "t_lc" does not exist, skipping
+DROP DATABASE
+CREATE DATABASE
+You are now connected to database "t_b2" as user "postgres".
+CREATE EXTENSION
+                                                      version                                                       | datname | datlocprovider | datcollate | datctype | datlocale 
+--------------------------------------------------------------------------------------------------------------------+---------+----------------+------------+----------+-----------
+ PostgreSQL 18.7 (Debian 18.7-1.pgdg13+5) on x86_64-pc-linux-gnu, compiled by gcc (Debian 14.2.0-19) 14.2.0, 64-bit | t_b2    | b              | C          | C        | C.UTF-8
+(1 row)
+
+ show_trgm 
+-----------
+ {}
+(1 row)
+
+You are now connected to database "t_lc" as user "postgres".
+CREATE EXTENSION
+ datname | datlocprovider | datcollate | datctype | datlocale 
+---------+----------------+------------+----------+-----------
+ t_lc    | c              | C          | C        | 
+(1 row)
+
+ show_trgm 
+-----------
+ {}
+(1 row)
+
+You are now connected to database "t_en" as user "postgres".
+    proname     | provolatile 
+----------------+-------------
+ is_normalized  | i
+ lower          | i
+ lower          | i
+ lower          | i
+ normalize      | i
+ regexp_replace | i
+ regexp_replace | i
+ regexp_replace | i
+ regexp_replace | i
+ regexp_replace | i
+ translate      | i
+(11 rows)
+
+  nfkc   | nfc_alef_hamza_above | raw_equal 
+---------+----------------------+-----------
+ لا الرز | أ                    | f
+(1 row)
+
+ decomposed_arz | precomposed 
+----------------+-------------
+ أرز            | ارز
+(1 row)
+
+ oprname | oprleft | oprright 
+---------+---------+----------
+ %>>     | text    | text
+ <->>>   | text    | text
+ <<%     | text    | text
+ <<<->   | text    | text
+(4 rows)
+
+ a | b | c 
+---+---+---
+ 1 | t | f
+(1 row)
+
+You are now connected to database "postgres" as user "postgres".
+CREATE TABLE
+ attname | attgenerated 
+---------+--------------
+ b       | v
+(1 row)
+
+psql:12_recheck_builtin.sql:20: ERROR:  indexes on virtual generated columns are not supported

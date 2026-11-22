@@ -1,0 +1,148 @@
+PostgreSQL 17.12 (Debian 17.12-1.pgdg13+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 14.2.0-19) 14.2.0, 64-bit
+=== PG17 t_c
+ db  | prov | collate | ctype | locale 
+-----+------+---------+-------+--------
+ t_c | c    | C       | C     | 
+(1 row)
+
+ trgm_arz | trgm_maqluba |          trgm_rice          
+----------+--------------+-----------------------------
+ {}       | {}           | {"  r"," ri","ce ",ice,ric}
+(1 row)
+
+ sim_maqluba | ws_rz_arz | pct_arz 
+-------------+-----------+---------
+           0 |         0 | f
+(1 row)
+
+   l1    | l_turkish_i | u_dotless | greek_final_sigma 
+---------+-------------+-----------+-------------------
+ أرز abc | İstanbul    | ı         | ΣΑΣ
+(1 row)
+
+=== PG17 t_builtin
+    db     | prov | collate | ctype | locale  
+-----------+------+---------+-------+---------
+ t_builtin | b    | C       | C     | C.UTF-8
+(1 row)
+
+ trgm_arz | trgm_maqluba |          trgm_rice          
+----------+--------------+-----------------------------
+ {}       | {}           | {"  r"," ri","ce ",ice,ric}
+(1 row)
+
+ sim_maqluba | ws_rz_arz | pct_arz 
+-------------+-----------+---------
+           0 |         0 | f
+(1 row)
+
+   l1    | l_turkish_i | u_dotless | greek_final_sigma 
+---------+-------------+-----------+-------------------
+ أرز abc | istanbul    | I         | σασ
+(1 row)
+
+=== PG17 t_builtin_ctype
+       db        | prov | collate |  ctype  | locale  
+-----------------+------+---------+---------+---------
+ t_builtin_ctype | b    | C       | C.UTF-8 | C.UTF-8
+(1 row)
+
+               trgm_arz                |                           trgm_maqluba                           |          trgm_rice          
+---------------------------------------+------------------------------------------------------------------+-----------------------------
+ {0x999df4,0x9c7218,0xc6f425,0x5d1d7a} | {0x83ac0a,0xa40379,0xa66016,0xe2dfcb,0xe7cd8e,0x3595e0,0x5b11f3} | {"  r"," ri","ce ",ice,ric}
+(1 row)
+
+ sim_maqluba | ws_rz_arz  | pct_arz 
+-------------+------------+---------
+   0.5555556 | 0.33333334 | f
+(1 row)
+
+   l1    | l_turkish_i | u_dotless | greek_final_sigma 
+---------+-------------+-----------+-------------------
+ أرز abc | istanbul    | I         | σασ
+(1 row)
+
+=== PG17 t_icu
+  db   | prov | collate | ctype | locale 
+-------+------+---------+-------+--------
+ t_icu | i    | C       | C     | und
+(1 row)
+
+ trgm_arz | trgm_maqluba |          trgm_rice          
+----------+--------------+-----------------------------
+ {}       | {}           | {"  r"," ri","ce ",ice,ric}
+(1 row)
+
+ sim_maqluba | ws_rz_arz | pct_arz 
+-------------+-----------+---------
+           0 |         0 | f
+(1 row)
+
+   l1    | l_turkish_i | u_dotless | greek_final_sigma 
+---------+-------------+-----------+-------------------
+ أرز abc | i̇stanbul    | I         | σας
+(1 row)
+
+=== PG17 t_icu_en
+    db    | prov |   collate   |    ctype    | locale 
+----------+------+-------------+-------------+--------
+ t_icu_en | i    | en_US.UTF-8 | en_US.UTF-8 | en-US
+(1 row)
+
+               trgm_arz                |                           trgm_maqluba                           |          trgm_rice          
+---------------------------------------+------------------------------------------------------------------+-----------------------------
+ {0x999df4,0x9c7218,0xc6f425,0x5d1d7a} | {0x83ac0a,0xa40379,0xa66016,0xe2dfcb,0xe7cd8e,0x3595e0,0x5b11f3} | {"  r"," ri","ce ",ice,ric}
+(1 row)
+
+ sim_maqluba | ws_rz_arz  | pct_arz 
+-------------+------------+---------
+   0.5555556 | 0.33333334 | f
+(1 row)
+
+   l1    | l_turkish_i | u_dotless | greek_final_sigma 
+---------+-------------+-----------+-------------------
+ أرز abc | i̇stanbul    | I         | σας
+(1 row)
+
+=== PG17 t_en
+  db  | prov |   collate   |    ctype    | locale 
+------+------+-------------+-------------+--------
+ t_en | c    | en_US.UTF-8 | en_US.UTF-8 | 
+(1 row)
+
+               trgm_arz                |                           trgm_maqluba                           |          trgm_rice          
+---------------------------------------+------------------------------------------------------------------+-----------------------------
+ {0x999df4,0x9c7218,0xc6f425,0x5d1d7a} | {0x83ac0a,0xa40379,0xa66016,0xe2dfcb,0xe7cd8e,0x3595e0,0x5b11f3} | {"  r"," ri","ce ",ice,ric}
+(1 row)
+
+ sim_maqluba | ws_rz_arz  | pct_arz 
+-------------+------------+---------
+   0.5555556 | 0.33333334 | f
+(1 row)
+
+   l1    | l_turkish_i | u_dotless | greek_final_sigma 
+---------+-------------+-----------+-------------------
+ أرز abc | istanbul    | I         | σασ
+(1 row)
+
+=== PG17 t_cutf8
+   db    | prov | collate |  ctype  | locale 
+---------+------+---------+---------+--------
+ t_cutf8 | c    | C.UTF-8 | C.UTF-8 | 
+(1 row)
+
+               trgm_arz                |                           trgm_maqluba                           |          trgm_rice          
+---------------------------------------+------------------------------------------------------------------+-----------------------------
+ {0x999df4,0x9c7218,0xc6f425,0x5d1d7a} | {0x83ac0a,0xa40379,0xa66016,0xe2dfcb,0xe7cd8e,0x3595e0,0x5b11f3} | {"  r"," ri","ce ",ice,ric}
+(1 row)
+
+ sim_maqluba | ws_rz_arz  | pct_arz 
+-------------+------------+---------
+   0.5555556 | 0.33333334 | f
+(1 row)
+
+   l1    | l_turkish_i | u_dotless | greek_final_sigma 
+---------+-------------+-----------+-------------------
+ أرز abc | istanbul    | I         | σασ
+(1 row)
+
