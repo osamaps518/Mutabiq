@@ -2,6 +2,7 @@
 name = "mutabiq"
 version = "0.1.0"
 description = "Arabic search normalization, aliases and an evaluation harness"
+readme = "README.md"
 authors = [
     { name = "osamaps", email = "osamams518@gmail.com" }
 ]
