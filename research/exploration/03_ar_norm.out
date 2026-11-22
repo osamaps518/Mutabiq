@@ -1,0 +1,19 @@
+psql:03_ar_norm.sql:2: NOTICE:  extension "pg_trgm" already exists, skipping
+CREATE EXTENSION
+ current_database |  datctype   
+------------------+-------------
+ t_en             | en_US.UTF-8
+
+CREATE FUNCTION
+CREATE FUNCTION
+ from_len | to_len_verbatim | to_len_fixed 
+----------+-----------------+--------------
+       28 |              29 |           28
+
+    w    | verbatim |  fixed  
+---------+----------+---------
+ کباب    |  باب     | كباب
+ كيک     | كي       | كيك
+ ٣ بيضات | 2 بيضات  | 3 بيضات
+ ۴ بیض   | 3 بيض    | 4 بيض
+

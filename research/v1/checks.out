@@ -1,0 +1,93 @@
+                                                      version                                                       
+--------------------------------------------------------------------------------------------------------------------
+ PostgreSQL 18.7 (Debian 18.7-1.pgdg13+5) on x86_64-pc-linux-gnu, compiled by gcc (Debian 14.2.0-19) 14.2.0, 64-bit
+
+ from_len | to_len 
+----------+--------
+       29 |     29
+
+  proname   | provolatile | proparallel 
+------------+-------------+-------------
+ ar_norm_v1 | i           | s
+
+            label            |             out             
+-----------------------------+-----------------------------
+ diacritics+taa              | مقلوبه
+ hamza alefs                 | ارز ارز ارز ارز
+ decomposed hamza (ا+U+0654) | ارز
+ decomposed madda (ا+U+0653) | ا
+ presentation forms          | لا الرز
+ ZWNJ/RLM/ALM/BOM inside     | رز ارز
+ NBSP + tabs                 | رز\u00a0\u00a0ابيض\t\tمسلوق
+ Quranic marks               | الرحمن
+ tatweel                     | دجاج
+ digits                      | 2 بيض 4 بيض
+ alef maqsura / yeh hamza    | مستشفي شاطي
+ keep hamza ء / ؤ            | سماء مسؤول
+ Persian kaf/yeh             | كيك
+ Latin                       | rice arz
+
+ idempotence_failures |   n   
+----------------------+-------
+                    0 | 20001
+
+psql:checks.sql:14: NOTICE:  table "v1_foods" does not exist, skipping
+DROP TABLE
+CREATE TABLE
+CREATE INDEX
+CREATE INDEX
+                         ok                          
+-----------------------------------------------------
+ STORED generated column + both GIN indexes accepted
+
+ doctor_trgm_sees_arabic 
+-------------------------
+ t
+
+                                                       version                                                        
+----------------------------------------------------------------------------------------------------------------------
+ PostgreSQL 17.12 (Debian 17.12-1.pgdg13+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 14.2.0-19) 14.2.0, 64-bit
+
+ from_len | to_len 
+----------+--------
+       29 |     29
+
+  proname   | provolatile | proparallel 
+------------+-------------+-------------
+ ar_norm_v1 | i           | s
+
+            label            |             out             
+-----------------------------+-----------------------------
+ diacritics+taa              | مقلوبه
+ hamza alefs                 | ارز ارز ارز ارز
+ decomposed hamza (ا+U+0654) | ارز
+ decomposed madda (ا+U+0653) | ا
+ presentation forms          | لا الرز
+ ZWNJ/RLM/ALM/BOM inside     | رز ارز
+ NBSP + tabs                 | رز\u00a0\u00a0ابيض\t\tمسلوق
+ Quranic marks               | الرحمن
+ tatweel                     | دجاج
+ digits                      | 2 بيض 4 بيض
+ alef maqsura / yeh hamza    | مستشفي شاطي
+ keep hamza ء / ؤ            | سماء مسؤول
+ Persian kaf/yeh             | كيك
+ Latin                       | rice arz
+
+ idempotence_failures |   n   
+----------------------+-------
+                    0 | 20001
+
+psql:checks.sql:14: NOTICE:  table "v1_foods" does not exist, skipping
+DROP TABLE
+CREATE TABLE
+CREATE INDEX
+CREATE INDEX
+                         ok                          
+-----------------------------------------------------
+ STORED generated column + both GIN indexes accepted
+
+ doctor_trgm_sees_arabic 
+-------------------------
+ t
+
+[رز ابيض مسلوق]

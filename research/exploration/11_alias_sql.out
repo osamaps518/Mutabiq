@@ -1,0 +1,78 @@
+psql:11_alias_sql.sql:3: NOTICE:  table "food_alias" does not exist, skipping
+DROP TABLE
+CREATE TABLE
+INSERT 0 6
+CREATE FUNCTION
+    rz    |    bandora     | no_alias 
+----------+----------------+----------
+ {ارز,رز} | {بندوره,طماطم} | {دجاج}
+
+SET
+--- رز via alias expansion + whole-word trigram match (no substring LIKE): uses the GIN index, no برز/كرز/مرزوق
+                                   QUERY PLAN                                    
+---------------------------------------------------------------------------------
+ Bitmap Heap Scan on foods (actual rows=5040.00 loops=1)
+   Recheck Cond: (name_search %> ANY (ar_variants('رز'::text)))
+   Heap Blocks: exact=117
+   Buffers: shared hit=10221
+   ->  Bitmap Index Scan on foods_name_search_trgm (actual rows=5229.00 loops=1)
+         Index Cond: (name_search %> ANY (ar_variants('رز'::text)))
+         Index Searches: 2
+         Buffers: shared hit=24
+ Planning:
+   Buffers: shared hit=92
+ Planning Time: 1.298 ms
+ Execution Time: 76.858 ms
+
+      base      
+----------------
+ أرز
+ أرز ١٠٠ غرام
+ أرز 200g
+ أرز أبيض
+ أرز بالخضار
+ أرز بالدجاج
+ أرز باللحم
+ أرز بسمتي
+ أرز صغير
+ أرز طازج
+ أرز عضوي
+ أرز قليل الدسم
+ أرز كامل الدسم
+ أرز كبير
+ أرز مجمد
+ أرز مسلوق
+ أرز مشوي
+ أرز مطبوخ
+ أرز مقلي
+ أرز منزلي
+ ارز
+ ارز ١٠٠ غرام
+ ارز 200g
+ ارز أبيض
+ ارز بالخضار
+ ارز بالدجاج
+ ارز باللحم
+ ارز بسمتي
+ ارز صغير
+ ارز طازج
+ ارز عضوي
+ ارز قليل الدسم
+ ارز كامل الدسم
+ ارز كبير
+ ارز مجمد
+ ارز مسلوق
+ ارز مشوي
+ ارز مطبوخ
+ ارز مقلي
+ ارز منزلي
+
+SET
+ first_word | count 
+------------+-------
+ ارز        |  1260
+ الأرز      |  1260
+ رز         |  1260
+ أرز        |  1260
+(4 rows)
+

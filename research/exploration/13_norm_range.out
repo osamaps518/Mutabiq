@@ -1,0 +1,19 @@
+You are now connected to database "t_en" as user "postgres".
+CREATE FUNCTION
+            label            |  cur  | nfc_065f 
+-----------------------------+-------+----------
+ أرز decomposed (ا+U+0654)   | أرز   | ارز
+ أرز precomposed             | ارز   | ارز
+ مسؤول decomposed (و+U+0654) | مسؤول | مسؤول
+ مسؤول precomposed           | مسؤول | مسؤول
+ آ decomposed (ا+U+0653)     | آ     | ا
+ ﻻ presentation form         | ﻻ     | ﻻ
+(6 rows)
+
+CREATE TABLE
+CREATE INDEX
+                                ok                                
+------------------------------------------------------------------
+ nfc-based function accepted for generated col + expression index
+(1 row)
+
