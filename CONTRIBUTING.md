@@ -4,7 +4,8 @@ How we work on Mutabiq. [docs/plan.md](docs/plan.md) says what we're building an
 
 ## Setup
 
-Coming once there's code to run.
+Install [uv](https://docs.astral.sh/uv/getting-started/installation/), then run `uv sync`.
+Run the checks in [README.md](README.md#checks) before a PR.
 
 ## Finding work
 
