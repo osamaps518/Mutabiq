@@ -250,3 +250,33 @@ NFKC (rule 1) has already turned U+00A0 NO-BREAK SPACE, U+2000–U+200A, U+202F,
   - رز U+0020 U+064B U+0020 ابيض → `رز ابيض`
 - **Why:** pasted text brings extra spaces, tabs and line breaks. Decision 7 says "collapse whitespace". Trimming both ends is part of that, not a new rule.
 - **Order:** last, because rules 1, 3 and 4 can leave spaces next to each other or at the ends.
+
+---
+
+## Differences from research/v1
+
+Each rule compared with `research/v1/ar_norm_v1.py` and `ar_norm_v1.sql`:
+
+| Rule | research/v1 |
+|---|---|
+| 1. NFKC | Same |
+| 2. A–Z, then `lower()` | Only `lower()`. Same output in Python. In a Turkish-locale database its SQL turns `I` into `ı` ([findings 2](findings.md#2-sql-cleaning-matches-python)) |
+| 3. Delete | Same list, plus U+200B |
+| 4. Zero-width space | Deletes it, because its range U+200B–U+200F includes it: رز U+200B ابيض → `رزابيض`, where this draft gives `رز ابيض` |
+| 5–10. Letters and digits | Same |
+| 11. Whitespace | Same, including the trim |
+
+The draft follows decision 7 in rules 2 and 4. The trim in rule 11 isn't in decision 7, and the draft states it as part of collapsing whitespace.
+
+---
+
+## Open cases
+
+These are kept as they are for now. Settle each against the labelled queries before 1.0. Changing any of them would change a rule, so it needs a new entry in [decisions.md](decisions.md).
+
+1. **Other invisible characters.** U+2060 WORD JOINER and U+180E MONGOLIAN VOWEL SEPARATOR (category Cf), and U+034F COMBINING GRAPHEME JOINER (a mark that is also invisible), aren't deleted: رز U+2060 ابيض stays as it is.
+2. **Whitespace NFKC leaves alone.** U+0085 NEXT LINE, U+1680 OGHAM SPACE MARK, U+2028 LINE SEPARATOR, U+2029 PARAGRAPH SEPARATOR and U+001C–U+001F aren't turned into spaces: رز U+2028 ابيض stays one word. Python's `str.split()` treats them as whitespace, rule 11 doesn't.
+3. **Arabic marks outside the ranges.** U+0610–U+061A (honorific signs and small fatha, damma, kasra) and the marks in U+0898–U+08FF (Arabic Extended-A and -B) aren't deleted: رز U+0618 keeps its mark.
+4. **High hamza and wavy hamza alefs.** NFKC turns U+0675–U+0678 into a letter plus U+0674 ARABIC LETTER HIGH HAMZA, which no rule removes: U+0675 → ا U+0674. U+0672 and U+0673 (ALEF WITH WAVY HAMZA ABOVE and BELOW) aren't mapped to ا.
+5. **Other Persian and Urdu letters.** Only ی and ک are mapped. ۀ (U+06C0), ہ (U+06C1), ۃ (U+06C3), ھ (U+06BE), ە (U+06D5) and ے (U+06D2) are kept. NFKC also composes ە U+0654 into ۀ, which then stays.
+6. **Arabic decimal and thousands separators.** U+066B and U+066C aren't mapped, so `١٫٥` → `1٫5`, not `1.5`. Punctuation in general, Arabic (، ؛ ؟) or ASCII, is kept.
