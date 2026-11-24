@@ -7,7 +7,7 @@ The open test catalog is published as CC0. Every row needs an Arabic name and a 
 | Source | Licence | What we take | `source` |
 |---|---|---|---|
 | Names written by Mutabiq contributors | Our own text, released as CC0 with the catalog ([decision 10](../docs/decisions.md#10-licences-mit-for-code-cc0-for-data)) | Arabic and English food names, including Arabic names we write for USDA foods | `own` |
-| [USDA FoodData Central](https://fdc.nal.usda.gov/) | [CC0 1.0 / public domain](https://fdc.nal.usda.gov/api-guide/#licensing) | English food descriptions and FDC IDs; we write the Arabic name for each such row | `usda` |
+| [USDA FoodData Central](https://fdc.nal.usda.gov/) | [CC0 1.0 / public domain](https://fdc.nal.usda.gov/api-guide#bkmk-6) | English food descriptions and FDC IDs; we write the Arabic name for each such row | `usda` |
 
 USDA's [published field descriptions](https://fdc.nal.usda.gov/portal-data/external/dataDictionary) describe a food description field, but no Arabic name or language-specific name field. It is not a source of Arabic translations for this catalog. A USDA row's Arabic name is our own text. The `source` value names the source of the row's external food record; our own Arabic wording on a USDA row does not change `usda` to `own`.
 
