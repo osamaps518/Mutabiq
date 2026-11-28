@@ -19,3 +19,16 @@ USDA has no Arabic names: its [field descriptions](https://fdc.nal.usda.gov/docs
 | Open Food Facts | [ODbL for its database; DbCL for individual contents](https://openfoodfacts.github.io/documentation/docs/Product-Opener/api/tutorials/license-be-on-the-legal-side/) | Attribution and share-alike conditions on the database. |
 | FAO AGROVOC Arabic terms | [CC BY 4.0](https://www.fao.org/agrovoc/ar/%D8%A7%D9%84%D8%B5%D9%8A%D8%A7%D9%86%D8%A9) | Its Arabic terms require attribution. |
 | Wikidata | [CC0 for structured data](https://www.wikidata.org/wiki/Wikidata:Licensing) | The licence fits, but decision 11 limits the catalog to our own names and USDA data. Revisit if decision 11 changes. |
+
+## Catalog
+
+`foods.csv` is the open search test catalog. It has one UTF-8 CSV row per saved name, with these columns in order:
+
+| Column | Meaning |
+|---|---|
+| `id` | Short, readable English identifier. Keep it unchanged once assigned, even if a name changes. |
+| `arabic_name` | The Arabic name as someone might save it. Spelling variants have separate rows and IDs. |
+| `english_name` | English name for reviewers and readers. |
+| `source` | `own` or `usda`, as defined above. |
+
+The first batch uses contributor-written names (`own`). It includes `برز` as an intentional typed variant of `رز` for testing searches where one name contains another; it is not a standard food name.

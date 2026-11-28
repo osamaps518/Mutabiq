@@ -1,0 +1,121 @@
+id,arabic_name,english_name,source
+rice,رز,Rice,own
+cherry,كرز,Cherry,own
+rice-b-typo,برز,Rice (typed variant),own
+rice-hamza,أرز,Rice,own
+rice-no-hamza,ارز,Rice,own
+white-rice,رز أبيض,White rice,own
+cooked-rice,رز مطبوخ,Cooked rice,own
+rice-with-milk,رز بالحليب,Rice pudding,own
+rice-with-chicken,رز بالدجاج,Chicken and rice,own
+rice-with-vegetables,رز بالخضار,Vegetable rice,own
+brown-rice,رز بني,Brown rice,own
+cherry-jam,مربى كرز,Cherry jam,own
+cherry-juice,عصير كرز,Cherry juice,own
+apple,تفاح,Apple,own
+green-apple,تفاح أخضر,Green apple,own
+red-apple,تفاح أحمر,Red apple,own
+banana,موز,Banana,own
+orange,برتقال,Orange,own
+orange-juice,عصير برتقال,Orange juice,own
+lemon,ليمون,Lemon,own
+lemon-juice,عصير ليمون,Lemon juice,own
+strawberry,فراولة,Strawberry,own
+strawberry-typed,فراوله,Strawberry,own
+grapes,عنب,Grapes,own
+watermelon,بطيخ,Watermelon,own
+melon,شمام,Melon,own
+peach,خوخ,Peach,own
+pear,إجاص,Pear,own
+pear-no-hamza,اجاص,Pear,own
+fig,تين,Fig,own
+dates,تمر,Dates,own
+pomegranate,رمان,Pomegranate,own
+mango,مانجو,Mango,own
+pineapple,أناناس,Pineapple,own
+pineapple-no-hamza,اناناس,Pineapple,own
+avocado,أفوكادو,Avocado,own
+avocado-no-hamza,افوكادو,Avocado,own
+tomato,طماطم,Tomato,own
+tomato-dialect,بندورة,Tomato,own
+cucumber,خيار,Cucumber,own
+carrot,جزر,Carrot,own
+potato,بطاطا,Potato,own
+fried-potatoes,بطاطا مقلية,Fried potatoes,own
+fried-potatoes-typed,بطاطا مقليه,Fried potatoes,own
+sweet-potato,بطاطا حلوة,Sweet potato,own
+onion,بصل,Onion,own
+garlic,ثوم,Garlic,own
+lettuce,خس,Lettuce,own
+spinach,سبانخ,Spinach,own
+cabbage,ملفوف,Cabbage,own
+cauliflower,قرنبيط,Cauliflower,own
+broccoli,بروكلي,Broccoli,own
+eggplant,باذنجان,Eggplant,own
+zucchini,كوسا,Zucchini,own
+green-pepper,فلفل أخضر,Green pepper,own
+red-pepper,فلفل أحمر,Red pepper,own
+parsley,بقدونس,Parsley,own
+mint,نعناع,Mint,own
+corn,ذرة,Corn,own
+peas,بازيلاء,Peas,own
+lentils,عدس,Lentils,own
+red-lentils,عدس أحمر,Red lentils,own
+chickpeas,حمص,Chickpeas,own
+cooked-chickpeas,حمص مسلوق,Boiled chickpeas,own
+white-beans,فاصوليا بيضاء,White beans,own
+green-beans,فاصوليا خضراء,Green beans,own
+fava-beans,فول,Fava beans,own
+bread,خبز,Bread,own
+white-bread,خبز أبيض,White bread,own
+whole-wheat-bread,خبز قمح كامل,Whole wheat bread,own
+pita-bread,خبز عربي,Pita bread,own
+toast,توست,Toast,own
+egg,بيضة,Egg,own
+egg-typed,بيضه,Egg,own
+boiled-egg,بيضة مسلوقة,Boiled egg,own
+fried-egg,بيض مقلي,Fried egg,own
+chicken,دجاج,Chicken,own
+grilled-chicken,دجاج مشوي,Grilled chicken,own
+chicken-breast,صدر دجاج,Chicken breast,own
+beef,لحم بقري,Beef,own
+lamb,لحم غنم,Lamb,own
+fish,سمك,Fish,own
+grilled-fish,سمك مشوي,Grilled fish,own
+tuna,تونة,Tuna,own
+tuna-typed,تونه,Tuna,own
+salmon,سلمون,Salmon,own
+milk,حليب,Milk,own
+yogurt,لبن,Yogurt,own
+cheese,جبنة,Cheese,own
+cheese-typed,جبنه,Cheese,own
+white-cheese,جبنة بيضاء,White cheese,own
+labneh,لبنة,Labneh,own
+labneh-typed,لبنه,Labneh,own
+butter,زبدة,Butter,own
+olive-oil,زيت زيتون,Olive oil,own
+olives,زيتون,Olives,own
+green-salad,سلطة خضراء,Green salad,own
+green-salad-typed,سلطه خضراء,Green salad,own
+tomato-salad,سلطة بندورة,Tomato salad,own
+lentil-soup,شوربة عدس,Lentil soup,own
+lentil-soup-typed,شوربه عدس,Lentil soup,own
+vegetable-soup,شوربة خضار,Vegetable soup,own
+maqluba,مقلوبة,Maqluba,own
+maqluba-typed,مقلوبه,Maqluba,own
+kunafa,كنافة,Kunafa,own
+kunafa-typed,كنافه,Kunafa,own
+apple-pie,فطيرة تفاح,Apple pie,own
+apple-pie-typed,فطيره تفاح,Apple pie,own
+chocolate-cake,كعكة شوكولاتة,Chocolate cake,own
+chocolate-cake-typed,كعكه شوكولاته,Chocolate cake,own
+black-coffee,قهوة سوداء,Black coffee,own
+coffee-typed,قهوه سوداء,Black coffee,own
+tea,شاي,Tea,own
+mint-tea,شاي بالنعناع,Mint tea,own
+water,ماء,Water,own
+the-rice,الرز,Rice,own
+the-cherry,الكرز,Cherry,own
+the-bread,الخبز,Bread,own
+the-eggs,البيض,Eggs,own
+the-milk,الحليب,Milk,own
