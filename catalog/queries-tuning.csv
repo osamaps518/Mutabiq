@@ -1,0 +1,41 @@
+query,relevant_ids,wrong_ids,kind
+مقلوبه,maqluba|maqluba-typed,,spelling
+مَقْلُوبَة,maqluba|maqluba-typed,,spelling
+كنافه,kunafa|kunafa-typed,,spelling
+جبنه,cheese|cheese-typed|white-cheese,labneh|labneh-typed,spelling
+فراوله,strawberry|strawberry-typed,,spelling
+قهوه سوداء,black-coffee|coffee-typed,,spelling
+بيضه مسلوقه,boiled-egg,egg|egg-typed|fried-egg,spelling
+تونه,tuna|tuna-typed,,spelling
+اجاص,pear|pear-no-hamza,,spelling
+اناناس,pineapple|pineapple-no-hamza,,spelling
+بطاطا مقليه,fried-potatoes|fried-potatoes-typed,sweet-potato,spelling
+شوربه عدس,lentil-soup|lentil-soup-typed,lentils|red-lentils,spelling
+بندورة,tomato|tomato-dialect|tomato-salad,green-salad|green-salad-typed,dialect
+طماطم,tomato|tomato-dialect|tomato-salad,,dialect
+رز,rice|rice-b-typo|rice-hamza|rice-no-hamza|white-rice|cooked-rice|rice-with-milk|rice-with-chicken|rice-with-vegetables|brown-rice|the-rice,cherry|the-cherry,dialect
+أرز,rice|rice-b-typo|rice-hamza|rice-no-hamza|white-rice|cooked-rice|rice-with-milk|rice-with-chicken|rice-with-vegetables|brown-rice|the-rice,cherry|the-cherry,dialect
+لبن,yogurt,milk|the-milk|labneh|labneh-typed,dialect
+روب,yogurt,milk|the-milk,dialect
+كوسة,zucchini,,dialect
+بطاطس,potato|fried-potatoes|fried-potatoes-typed|sweet-potato,,dialect
+عيش,bread|white-bread|whole-wheat-bread|pita-bread|the-bread,toast,dialect
+حامض,lemon|lemon-juice,orange|orange-juice,dialect
+كر,cherry|cherry-jam|cherry-juice|the-cherry,rice|the-rice,short
+مقلو,maqluba|maqluba-typed,,short
+فراو,strawberry|strawberry-typed,,short
+قرنب,cauliflower,,short
+بروك,broccoli,,short
+بازي,peas,,short
+سلمو,salmon,,short
+أفوك,avocado|avocado-no-hamza,,short
+زيتو,olives|olive-oil,,short
+شوكولا,chocolate-cake|chocolate-cake-typed,,short
+rice,rice|rice-b-typo|rice-hamza|rice-no-hamza|white-rice|cooked-rice|rice-with-milk|rice-with-chicken|rice-with-vegetables|brown-rice|the-rice,cherry|the-cherry,english
+Cherry,cherry|cherry-jam|cherry-juice|the-cherry,rice|the-rice,english
+tomato,tomato|tomato-dialect|tomato-salad,,english
+fried potatoes,fried-potatoes|fried-potatoes-typed,potato|sweet-potato,english
+maqluba,maqluba|maqluba-typed,,english
+strawberry,strawberry|strawberry-typed,,english
+yogurt,yogurt,milk|the-milk,english
+olive oil,olive-oil,olives,english

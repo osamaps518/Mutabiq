@@ -1,0 +1,11 @@
+query,relevant_ids,wrong_ids,kind
+سلطه خضراء,green-salad|green-salad-typed,tomato-salad,spelling
+فطيره تفاح,apple-pie|apple-pie-typed,apple|green-apple|red-apple,spelling
+بطيخ أحمر,watermelon,melon,dialect
+بندوره,tomato|tomato-dialect|tomato-salad,green-salad|green-salad-typed,dialect
+برز,rice|rice-b-typo|rice-hamza|rice-no-hamza|white-rice|cooked-rice|rice-with-milk|rice-with-chicken|rice-with-vegetables|brown-rice|the-rice,cherry|the-cherry,spelling
+قهو,black-coffee|coffee-typed,,short
+جبن,cheese|cheese-typed|white-cheese,labneh|labneh-typed,short
+سمك مش,grilled-fish,fish,short
+labneh,labneh|labneh-typed,yogurt,english
+salmon,salmon,fish|grilled-fish,english

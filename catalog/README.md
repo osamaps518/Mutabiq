@@ -32,3 +32,16 @@ USDA has no Arabic names: its [field descriptions](https://fdc.nal.usda.gov/docs
 | `source` | `own` or `usda`, as defined above. |
 
 The first batch uses contributor-written names (`own`). It includes `برز` as an intentional typed variant of `رز` for testing searches where one name contains another; it is not a standard food name.
+
+## Labelled queries
+
+`queries-tuning.csv` and `queries-grading.csv` each have one UTF-8 CSV row per query, with these columns in order:
+
+| Column | Meaning |
+|---|---|
+| `query` | Original text someone might type. Each query appears in only one file. |
+| `relevant_ids` | All catalog IDs that should come back, separated by `|`. Every query has at least one. |
+| `wrong_ids` | Catalog IDs that must not come back, separated by `|`. This can be empty; items in neither list are unjudged. |
+| `kind` | Main case covered: `spelling`, `dialect`, `short`, or `english`. |
+
+Labels describe intended results, even when today's search cannot find them. Broad queries include every matching catalog item, including compound foods. `wrong_ids` lists likely look-alikes, not every unrelated food. The grading file is set aside for final grading and must never be used while tuning search behavior or thresholds ([decision 13](../docs/decisions.md#13-measure-before-choosing)). The query text and labels here were written by contributors, not taken from search logs.
